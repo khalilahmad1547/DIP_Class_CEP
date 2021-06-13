@@ -3,6 +3,17 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+def merge(r_channel, g_channel, b_channel):
+    rows = r_channel.shape[0]
+    columns = r_channel.shape[1]
+    out_img = np.zeros((rows, columns, 3))
+    out_img[:, :, 0] = r_channel
+    out_img[:, :, 1] = g_channel
+    out_img[:, :, 2] = b_channel
+    return  out_img
+
+
 # reading image
 img_1 = cv.imread("cameraman.png")
 img_shape = img_1.shape
@@ -25,4 +36,15 @@ h_2 = 1 / 256 * np.array([[1, 4, 6, 4, 1],
                           [4, 16, 24, 16, 4],
                           [1, 4, 6, 4, 1]
                           ])
+# applying filter
+R_channel_flt_1 = cv.filter2D(R_channel, -1, h_1)
+G_channel_flt_1 = cv.filter2D(G_channel, -1, h_1)
+B_channel_flt_1 = cv.filter2D(B_channel, -1, h_1)
 
+R_channel_flt_2 = cv.filter2D(R_channel, -1, h_2)
+G_channel_flt_2 = cv.filter2D(G_channel, -1, h_2)
+B_channel_flt_2 = cv.filter2D(B_channel, -1, h_2)
+
+# merging back
+flt_img_1 = merge(R_channel_flt_1, G_channel_flt_1, B_channel_flt_1)
+flt_img_2 = merge(R_channel_flt_2, G_channel_flt_2, B_channel_flt_2)
