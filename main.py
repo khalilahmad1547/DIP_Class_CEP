@@ -57,3 +57,7 @@ B_channel_flt_2 = cv.filter2D(B_channel, -1, h_2)
 # merging back
 flt_img_1 = merge(R_channel_flt_1, G_channel_flt_1, B_channel_flt_1)
 flt_img_2 = merge(R_channel_flt_2, G_channel_flt_2, B_channel_flt_2)
+
+# saving results
+writetodisk("./Problem_01_results/P_01_flt_img_01.png", flt_img_1, my_flag)
+writetodisk("./Problem_01_results/P_01_flt_img_02.png", flt_img_2, my_flag)
