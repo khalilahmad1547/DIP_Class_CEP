@@ -3,6 +3,14 @@ import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
 
+# a flag, weather to write results to disk or not
+my_flag = 0
+
+
+def writetodisk(path, img, flag):
+    if flag == 1:
+        cv.imwrite(path, img)
+
 
 def merge(r_channel, g_channel, b_channel):
     rows = r_channel.shape[0]
@@ -11,7 +19,7 @@ def merge(r_channel, g_channel, b_channel):
     out_img[:, :, 0] = r_channel
     out_img[:, :, 1] = g_channel
     out_img[:, :, 2] = b_channel
-    return  out_img
+    return out_img
 
 
 # reading image
@@ -24,9 +32,10 @@ G_channel = img_1[:, :, 1]
 B_channel = img_1[:, :, 2]
 
 # saving results
-cv.imwrite("./Problem_01_results/r_channel.png", R_channel)
-cv.imwrite("./Problem_01_results/g_channel.png", G_channel)
-cv.imwrite("./Problem_01_results/b_channel.png", B_channel)
+writetodisk("./Problem_01_results/r_channel.png", R_channel, my_flag)
+writetodisk("./Problem_01_results/r_channel.png", R_channel, my_flag)
+writetodisk("./Problem_01_results/g_channel.png", G_channel, my_flag)
+writetodisk("./Problem_01_results/b_channel.png", B_channel, my_flag)
 
 # given filters
 h_1 = 1 / 9 * np.ones((3, 3))
