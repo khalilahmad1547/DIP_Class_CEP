@@ -188,3 +188,9 @@ def HSI2RGB(hsi_img):
     rgb_img[:, :, 2] = R * 255
     return rgb_img
 
+
+# converting image to hsi
+
+# filtering I only
+
+# converting back to rgb
