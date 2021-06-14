@@ -1,10 +1,11 @@
 # importing required libraries
 import cv2 as cv
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 
 # a flag, weather to write results to disk or not
-my_flag = 0
+my_flag = 1
 
 
 def writetodisk(path, img, flag):
@@ -61,3 +62,17 @@ flt_img_2 = merge(R_channel_flt_2, G_channel_flt_2, B_channel_flt_2)
 # saving results
 writetodisk("./Problem_01_results/P_01_flt_img_01.png", flt_img_1, my_flag)
 writetodisk("./Problem_01_results/P_01_flt_img_02.png", flt_img_2, my_flag)
+
+
+# Problem: 02
+def getMSE(img_1, img_2):
+    if img_1.shape == img_2.shape:
+        dia = img_1.shape
+        mse = (1 / (dia[0] * dia[1] * dia[2])) * np.sum(np.square(img_1 - img_2))
+        return mse
+    else:
+        print("Images should have same dimension")
+
+
+def getPSNR(max, mse):
+    return 10 * math.log10((np.square(max)) / mse)
