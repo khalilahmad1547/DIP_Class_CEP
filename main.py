@@ -64,6 +64,7 @@ writetodisk("./Problem_01_results/P_01_flt_img_01.png", flt_img_1, my_flag)
 writetodisk("./Problem_01_results/P_01_flt_img_02.png", flt_img_2, my_flag)
 
 
+# #######################################################################################
 # Problem: 02
 def getMSE(img_1, img_2):
     if img_1.shape == img_2.shape:
@@ -76,3 +77,9 @@ def getMSE(img_1, img_2):
 
 def getPSNR(max, mse):
     return 10 * math.log10((np.square(max)) / mse)
+
+
+mse_img = getMSE(img_1, flt_img_1)
+psnr_img = getPSNR(255, mse_img)
+
+######################################################################################
