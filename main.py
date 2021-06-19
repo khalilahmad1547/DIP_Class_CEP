@@ -86,7 +86,34 @@ psnr_img = getPSNR(255, mse_img)
 ######################################################################################
 
 # converting image to hsi
+hsi_img = cv.cvtColor(img_1, cv.COLOR_RGB2Lab)
+
+# separating H, S and I part
+h_channel = hsi_img[:, :, 0]
+s_channel = hsi_img[:, :, 1]
+i_channel = hsi_img[:, :, 2]
 
 # filtering I only
+i_flt_img_1 = cv.filter2D(i_channel, -1, h_1)
+i_flt_img_2 = cv.filter2D(i_channel, -1, h_2)
+
+# merging back
+hsi_flt_img_1 = merge(h_channel, s_channel, i_flt_img_1)
+hsi_flt_img_2 = merge(h_channel, s_channel, i_flt_img_2)
+
+# converting from float64 type to float32
+# as float64 is not supported by cv.cvtColor() function
+hsi_flt_img_1 = np.float32(hsi_flt_img_1)
+hsi_flt_img_2 = np.float32(hsi_flt_img_2)
 
 # converting back to rgb
+hsi2rgb_img_1 = cv.cvtColor(hsi_flt_img_1, cv.COLOR_HSV2RGB)
+hsi2rgb_img_2 = cv.cvtColor(hsi_flt_img_2, cv.COLOR_HSV2RGB)
+
+# finding mse value
+mse_img_1 = getMSE(img_1, hsi2rgb_img_1)
+mse_img_2 = getMSE(img_1, hsi2rgb_img_2)
+
+# finding psnr value
+psnr_img_1 = getPSNR(255, mse_img_1)
+psnr_img_2 = getPSNR(255, mse_img_2)
