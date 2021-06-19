@@ -2,6 +2,7 @@
 import cv2 as cv
 import numpy as np
 import math
+import time
 import matplotlib.pyplot as plt
 
 # a flag, weather to write results to disk or not
@@ -23,6 +24,7 @@ def merge(r_channel, g_channel, b_channel):
     return out_img
 
 
+p_01_start_time = time.time()
 # reading image
 img_1 = cv.imread("cameraman.png")
 img_shape = img_1.shape
@@ -59,6 +61,8 @@ B_channel_flt_2 = cv.filter2D(B_channel, -1, h_2)
 flt_img_1 = merge(R_channel_flt_1, G_channel_flt_1, B_channel_flt_1)
 flt_img_2 = merge(R_channel_flt_2, G_channel_flt_2, B_channel_flt_2)
 
+p_01_end_time = time.time()
+
 # saving results
 writetodisk("./Problem_01_results/P_01_flt_img_01.png", flt_img_1, my_flag)
 writetodisk("./Problem_01_results/P_01_flt_img_02.png", flt_img_2, my_flag)
@@ -79,12 +83,16 @@ def getPSNR(max, mse):
     return 10 * math.log10((np.square(max)) / mse)
 
 
+# starting time of problem 02
+p_02_start_time = time.time()
+
 mse_img = getMSE(img_1, flt_img_1)
 psnr_img = getPSNR(255, mse_img)
 
-
+# end time of the problem 02
+p_02_end_time = time.time()
 ######################################################################################
-
+# Problem 03
 # converting image to hsi
 hsi_img = cv.cvtColor(img_1, cv.COLOR_RGB2Lab)
 
