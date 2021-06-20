@@ -24,10 +24,13 @@ def merge(r_channel, g_channel, b_channel):
     return out_img
 
 
-p_01_start_time = time.time()
+
 # reading image
 img_1 = cv.imread("cameraman.png")
 img_shape = img_1.shape
+
+# starting time of problem 01
+p_01_start_time = time.time()
 
 # separating Red, Green and Blue Channels
 R_channel = img_1[:, :, 0]
