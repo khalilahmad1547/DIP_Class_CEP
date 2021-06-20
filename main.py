@@ -125,3 +125,39 @@ mse_img_2 = getMSE(img_1, hsi2rgb_img_2)
 # finding psnr value
 psnr_img_1 = getPSNR(255, mse_img_1)
 psnr_img_2 = getPSNR(255, mse_img_2)
+
+######################################################################################
+# problem 04
+
+# starting time of problem 04
+p_04_start_time = time.time()
+
+# converting RGB space to YCbCr
+ycbcr_img = cv.cvtColor(img_1, cv.COLOR_RGB2YCrCb)
+
+# separating channels
+y_channel = ycbcr_img[:, :, 0]
+cb_channel = ycbcr_img[:, :, 1]
+cr_channel = ycbcr_img[:, :, 2]
+
+# applying filers to y channel
+flt_01_y_channel = cv.filter2D(y_channel, -1, h_1)
+flt_02_y_channel = cv.filter2D(y_channel, -1, h_2)
+
+# merging back
+flt_ycbcr_img_01 = merge(flt_01_y_channel, cb_channel, cr_channel)
+flt_ycbcr_img_02 = merge(flt_02_y_channel, cb_channel, cr_channel)
+
+# converting float 64 to float 32
+flt_ycbcr_img_01 = np.float32(flt_ycbcr_img_01)
+flt_ycbcr_img_02 = np.float32(flt_ycbcr_img_02)
+
+# taking back to RGB space
+flt_rgb_img_01 = cv.cvtColor(flt_ycbcr_img_01, cv.COLOR_YCrCb2RGB)
+flt_rgb_img_02 = cv.cvtColor(flt_ycbcr_img_02, cv.COLOR_YCrCb2RGB)
+
+# ending time of problem 04
+p_04_end_time = time.time()
+
+######################################################################################
+# problem 05
