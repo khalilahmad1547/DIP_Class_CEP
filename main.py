@@ -94,6 +94,10 @@ p_02_end_time = time.time()
 ######################################################################################
 # Problem 03
 # converting image to hsi
+
+# starting time of problem 03
+p_03_start_time = time.time()
+
 hsi_img = cv.cvtColor(img_1, cv.COLOR_RGB2Lab)
 
 # separating H, S and I part
@@ -125,6 +129,9 @@ mse_img_2 = getMSE(img_1, hsi2rgb_img_2)
 # finding psnr value
 psnr_img_1 = getPSNR(255, mse_img_1)
 psnr_img_2 = getPSNR(255, mse_img_2)
+
+# ending time of problem 03
+p_03_end_time = time.time()
 
 ######################################################################################
 # problem 04
@@ -158,3 +165,10 @@ flt_rgb_img_02 = cv.cvtColor(flt_ycbcr_img_02, cv.COLOR_YCrCb2RGB)
 
 # ending time of problem 04
 p_04_end_time = time.time()
+
+######################################################################################
+# creating a report for time
+print(f"Time taken by Problem 01 {p_01_end_time - p_01_start_time}")
+print(f"Time taken by Problem 02 {p_02_end_time - p_02_start_time}")
+print(f"Time taken by Problem 03 {p_03_end_time - p_03_start_time}")
+print(f"Time taken by Problem 04 {p_04_end_time - p_04_start_time}")
