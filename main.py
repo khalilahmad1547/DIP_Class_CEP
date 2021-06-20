@@ -158,6 +158,3 @@ flt_rgb_img_02 = cv.cvtColor(flt_ycbcr_img_02, cv.COLOR_YCrCb2RGB)
 
 # ending time of problem 04
 p_04_end_time = time.time()
-
-######################################################################################
-# problem 05
